@@ -91,11 +91,21 @@ func main() {
 			Namespace: namespace,
 		},
 		Spec: pulp.PulpSpec{
+			Api: pulp.Api{
+				Replicas: 1,
+			},
+			Content: pulp.Content{
+				Replicas: 1,
+			},
+			Worker: pulp.Worker{
+				Replicas: 1,
+			},
 			Database: pulp.Database{
 				ExternalDBSecret: externalDBSecretName,
 			},
 			Cache: pulp.Cache{
 				ExternalCacheSecret: externalRedisSecretName,
+				Enabled:             true,
 			},
 			ObjectStorageS3Secret: s3SecretName,
 			PulpSettings: runtime.RawExtension{
